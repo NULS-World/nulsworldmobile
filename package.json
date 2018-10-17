@@ -1,0 +1,32 @@
+{
+  "name": "nulsworldjs",
+  "description": "NULS.World Mobile App (Wallet and Explorer for the NULS Blockchain)",
+  "nativescript": {
+    "id": "org.nativescript.nulsworldmobile",
+    "tns-android": {
+      "version": "4.2.0"
+    },
+    "tns-ios": {
+      "version": "4.2.0"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moshemalawach/nulsworldmobile.git"
+  },
+  "keywords": [
+    "nuls",
+    "blockchain"
+  ],
+  "author": "Moshe Malawach",
+  "license": "MIT",
+  "homepage": "https://github.com/moshemalawach/nulsworldmobile#readme",
+  "dependencies": {
+    "nativescript-theme-core": "~1.0.4",
+    "tns-core-modules": "~4.2.0"
+  },
+  "devDependencies": {
+    "nativescript-dev-webpack": "~0.16.0"
+  },
+  "readme": "NativeScript Application"
+}

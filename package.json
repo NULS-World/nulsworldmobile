@@ -16,14 +16,28 @@
     }
   },
   "dependencies": {
-    "vuex": "^3.0.1",
     "@vue/devtools": "5.0.0-beta.3",
+    "axios": "^0.18.0",
+    "bigi": "^1.4.2",
+    "bs58": "^4.0.1",
+    "int64-buffer": "^0.99.1007",
+    "nativescript-cardview": "^3.1.1",
+    "nativescript-carousel": "^4.0.2",
+    "nativescript-fonticon": "^2.0.0",
+    "nativescript-material-icons": "^1.0.3",
+    "nativescript-secure-storage": "^2.3.0",
     "nativescript-socket.io": "^0.9.0",
-    "nativescript-vue-devtools": "^1.0.0",
-    "nativescript-toast": "^1.4.6",
     "nativescript-theme-core": "^1.0.4",
+    "nativescript-toast": "^1.4.6",
     "nativescript-vue": "^2.0.0",
-    "tns-core-modules": "^4.2.0"
+    "nativescript-vue-devtools": "^1.0.0",
+    "nulsworldjs": "^0.1.0",
+    "ripemd160": "^2.0.2",
+    "secp256k1": "^3.5.2",
+    "sha.js": "^2.4.11",
+    "tns-core-modules": "^4.2.0",
+    "util": "^0.10.3",
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",

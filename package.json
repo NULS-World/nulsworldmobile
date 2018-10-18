@@ -15,7 +15,7 @@
       "version": "4.2.0"
     }
   },
-  "dependencies": {
+  "dependencies": { 
     "@vue/devtools": "5.0.0-beta.3",
     "axios": "^0.18.0",
     "bigi": "^1.4.2",

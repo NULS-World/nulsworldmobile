@@ -2,7 +2,7 @@ module.exports = function (api) {
   api.cache(true)
 
   return {
-    presets: [['@babel/env', { targets: { esmodules: true } }]],
-    plugins: ["@babel/plugin-transform-async-to-generator"]
+    presets: [['@babel/env', { targets: { esmodules: true } }]]//,
+    //plugins: ["@babel/plugin-transform-async-to-generator"]
   }
 }

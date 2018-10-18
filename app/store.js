@@ -24,7 +24,10 @@ export default new Vuex.Store({
     async add_account(state, account) {
       console.log(account)
       state.accounts.push(account)
-      await SecureStorage.set('accounts', JSON.stringify(state.accounts))
+      await SecureStorage.set({
+        key: 'accounts',
+        value:  JSON.stringify(state.accounts)
+      })
     },
     update_accounts(state, accounts) {
       state.accounts = accounts

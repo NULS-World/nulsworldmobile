@@ -13,8 +13,8 @@
                  androidSelectedTabHighlightColor="rgba(18,38,63,.9)">
             <TabViewItem title="Portfolio">
                 <AbsoluteLayout ref="portfolioLayout">
-                  <GridLayout columns="*" rows="*,3*" left="0" top="0" height="100%" width="100%" marginBottom="48">
-                      <GridLayout col="0" row="0" columns="*,*,*" rows="*" class="nuls-blue">
+                  <StackLayout orientation="vertical" left="0" top="0" height="100%" width="100%" marginBottom="48">
+                      <GridLayout col="0" row="0" height="100" columns="*,*,*" rows="*" class="nuls-blue">
                         <StackLayout orientation="vertical" col="0" row="0">
                           <Label class="header-pretitle text-secondary" text="Staked" />
                           <Label class="text-white">
@@ -36,12 +36,20 @@
                           </Label>
                         </StackLayout>
                       </GridLayout>
-                      <Label class="message" text="Tab 1b Content" col="0" row="1"/>
-                  </GridLayout>
-			            <StackLayout left="0" top="0" height="100%" width="100%" class="backdrop" :class="classBackdrop" />
+                      <ScrollView>
+                  			<ListView for="account in accounts" class="list-group" @itemTap="onItemTap">
+                  				<v-template>
+                  					<GridLayout class="list-group-item" rows="*,*" columns="3*,*">
+                  						<Label row="0" col="0" :text="account.address" class="address" />
+                  					</GridLayout>
+                  				</v-template>
+                  			</ListView>
+                  		</ScrollView>
+                  </StackLayout>
+			            <StackLayout left="0" top="0" height="100%" width="100%" class="backdrop" />
 
             			<AbsoluteLayout ref="fabItemPosition" marginTop="83%" marginLeft="75%">
-                    <CardView elevation="10" radius="75" margin="10" width="56" height="56" class="add-card">
+                    <CardView elevation="10" radius="79" margin="10" width="60" height="60" class="add-card">
             				  <Button @tap="onAddTap" class="add-button fe" id="add-button">&#xe8b1;</Button>
                     </CardView>
             			</AbsoluteLayout>
@@ -68,8 +76,10 @@
 
 <script>
   import * as view from "ui/core/view";
+  import * as http from "http";
   import { mapState } from 'vuex'
   import secp256k1 from 'secp256k1'
+  import axios from 'axios'
 
   import {private_key_to_public_key,
           address_from_hash,
@@ -102,6 +112,7 @@
     }),
     watch:{
       async accounts() {
+        console.log("accounts changed")
         await this.updateStats()
       }
     },
@@ -113,7 +124,7 @@
           if (result.text.length == 32) {
             this.$store.commit('add_account', {
               'type': 'watch',
-              'address': result.address,
+              'address': result.text,
               'name': null,
               'private_key': null
             })
@@ -156,8 +167,6 @@
         this.total_available = Object.values(this.unspent_info).map((u) => u.available_value).reduce((e, i) => e + i)
         this.total_consensus_locked = Object.values(this.unspent_info).map((u) => u.consensus_locked_value).reduce((e, i) => e + i)
         this.total_time_locked = Object.values(this.unspent_info).map((u) => u.time_locked_value).reduce((e, i) => e + i)
-        this.accounts = this.$root.$data.accounts
-        this.update_charts()
       }
     },
     async created() {
@@ -188,7 +197,7 @@ ActionBar {
 }
 
 .add-card {
-  background: orangered;
+  background: white;
   vertical-align: center;
   text-align: center;
 }
@@ -201,12 +210,17 @@ Button.add-button {
   width: 56;
   height: 56;
   font-size: 25;
-  background: orangered;
+  margin: 2;
+  background: linear-gradient(-133deg, #002e5e 0%, #092243 89%, #0a2140 100%);
   border-radius: 50%;
   transition: all 1s ease-in;
 }
 
 Button.add-button:highlighted {
-  background: coral;
+  background: #000;
+}
+
+.list-group-item .address {
+  font-size: 14;
 }
 </style>

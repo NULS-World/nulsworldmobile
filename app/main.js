@@ -22,9 +22,10 @@ new Vue({
   store: store,
   async mounted() {
     try{
-      if (await secureStorage.get('accounts'))
+      if (await secureStorage.get({key: 'accounts'}))
       {
-        this.$store.commit('update_accounts', JSON.parse(await secureStorage.get('accounts')))
+        this.$store.commit('update_accounts', JSON.parse(await secureStorage.get({key: 'accounts'})))
+        console.log(this.$store.accounts)
       }
     } catch (e) {
       console.warn("Can't import data", e);

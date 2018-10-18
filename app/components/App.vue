@@ -1,11 +1,17 @@
 <template>
-    <Page ref="page">
-        <ActionBar title="NULS World" android:flat="true"/>
-        <TabView android:tabBackgroundColor="#53ba82"
-                 android:tabTextColor="#c4ffdf"
-                 android:selectedTabTextColor="#ffffff"
-                 androidSelectedTabHighlightColor="#ffffff">
-            <TabViewItem title="Portfolio" iconSource="~/assets/images/briefcase.svg">
+    <Page ref="page" backgroundSpanUnderStatusBar="true" statusBarStyle="light">
+        <ActionBar title="NULS World"
+                   android:flat="true">
+          <StackLayout orientation="horizontal"
+            horizontalAlignment="center">
+            <Image src="~/assets/images/logo96.png" height="40"></Image>
+          </StackLayout>
+        </ActionBar>
+        <TabView android:tabBackgroundColor="#fff"
+                 android:tabTextColor="#6e84a3"
+                 android:selectedTabTextColor="rgba(18,38,63,.9)"
+                 androidSelectedTabHighlightColor="rgba(18,38,63,.9)">
+            <TabViewItem title="Portfolio">
                 <AbsoluteLayout ref="portfolioLayout">
                   <GridLayout columns="*" rows="*,*,3*" left="0" top="0" height="100%" width="100%" marginBottom="48">
                       <StackLayout col="0" row="0" class="nuls-blue">
@@ -16,9 +22,9 @@
                   </GridLayout>
 			            <StackLayout left="0" top="0" height="100%" width="100%" class="backdrop" :class="classBackdrop" />
 
-            			<AbsoluteLayout ref="fabItemPosition" marginTop="87%" marginLeft="80%">
+            			<AbsoluteLayout ref="fabItemPosition" marginTop="83%" marginLeft="75%">
                     <CardView elevation="10" radius="75" margin="10" width="56" height="56" class="add-card">
-            				  <Button text="+" @tap="onAddTap" class="add-button" id="add-button" />
+            				  <Button @tap="onAddTap" class="add-button fe" id="add-button">&#xe8b1;</Button>
                     </CardView>
             			</AbsoluteLayout>
                 </AbsoluteLayout>
@@ -76,6 +82,11 @@
       selected_account: state => state.selected_account,
       last_broadcast: state => state.last_broadcast
     }),
+    watch:{
+      async accounts() {
+        await this.updateStats()
+      }
+    },
     methods: {
       async onAddTap() {
         let result = await prompt('Please input an address (view-only) or a private key (wallet mode).', 'Ns')
@@ -138,42 +149,46 @@
 </script>
 
 <style scoped>
-    ActionBar {
-        background-color: #53ba82;
-        color: #ffffff;
-    }
+Page {
+  background-color: #fff;
+}
+ActionBar {
+    background-color: #fff;
+    color: rgba(18,38,63,.9);
+}
 
-    .message {
-        vertical-align: center;
-        text-align: center;
-        font-size: 20;
-        color: #333333;
-    }
+.message {
+    vertical-align: center;
+    text-align: center;
+    font-size: 20;
+    color: #333333;
+}
 
-    .nuls-blue {
-      background: linear-gradient(-133deg, #002e5e 0%, #092243 89%, #0a2140 100%);
-      color: #fff;
-    }
+.nuls-blue {
+  background: linear-gradient(-133deg, #002e5e 0%, #092243 89%, #0a2140 100%);
+  color: #fff;
+}
 
-    .add-card {
-      background: orangered;
-      vertical-align: center;
-      text-align: center;
-    }
+.add-card {
+  background: orangered;
+  vertical-align: center;
+  text-align: center;
+}
 
-    Button.add-button {
-      vertical-align: center;
-      text-align: center;
-      color: #fff;
-      border: 0;
-      width: 56;
-      height: 56;
-      background: orangered;
-      border-radius: 50%;
-      transition: all 1s ease-in;
-    }
+Button.add-button {
+  vertical-align: center;
+  text-align: center;
+  color: #fff;
+  border: 0;
+  width: 56;
+  height: 56;
+  font-size: 25;
+  background: orangered;
+  border-radius: 50%;
+  transition: all 1s ease-in;
+}
 
-    Button.add-button:highlighted {
-      background: coral;
-    }
+Button.add-button:highlighted {
+  background: coral;
+}
 </style>

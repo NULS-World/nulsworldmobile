@@ -13,12 +13,30 @@
                  androidSelectedTabHighlightColor="rgba(18,38,63,.9)">
             <TabViewItem title="Portfolio">
                 <AbsoluteLayout ref="portfolioLayout">
-                  <GridLayout columns="*" rows="*,*,3*" left="0" top="0" height="100%" width="100%" marginBottom="48">
-                      <StackLayout col="0" row="0" class="nuls-blue">
-                        <Label class="fe">&#xe81e;</Label>
-                        <Label class="message" text="Tab 1a Contentc" />
-                      </StackLayout>
-                      <Label class="message" text="Tab 1b Content" col="0" row="2"/>
+                  <GridLayout columns="*" rows="*,3*" left="0" top="0" height="100%" width="100%" marginBottom="48">
+                      <GridLayout col="0" row="0" columns="*,*,*" rows="*" class="nuls-blue">
+                        <StackLayout orientation="vertical" col="0" row="0">
+                          <Label class="header-pretitle text-secondary" text="Staked" />
+                          <Label class="text-white">
+                            {{(total_consensus_locked || 0)/100000000}}
+                          </Label>
+                        </StackLayout>
+
+                        <StackLayout orientation="vertical" col="1" row="0">
+                          <Label class="header-pretitle text-secondary" text="Time Locked" />
+                          <Label class="text-white">
+                            {{(total_time_locked || 0)/100000000}}
+                          </Label>
+                        </StackLayout>
+
+                        <StackLayout orientation="vertical" col="2" row="0">
+                          <Label class="header-pretitle text-secondary" text="Available" />
+                          <Label class="text-white">
+                            {{(total_available || 0)/100000000}}
+                          </Label>
+                        </StackLayout>
+                      </GridLayout>
+                      <Label class="message" text="Tab 1b Content" col="0" row="1"/>
                   </GridLayout>
 			            <StackLayout left="0" top="0" height="100%" width="100%" class="backdrop" :class="classBackdrop" />
 

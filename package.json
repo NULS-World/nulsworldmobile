@@ -1,32 +1,51 @@
 {
-  "name": "nulsworldjs",
+  "name": "nulsworldmobile",
+  "version": "0.1.0",
   "description": "NULS.World Mobile App (Wallet and Explorer for the NULS Blockchain)",
+  "author": "Moshe Malawach <moshe.malawach@protonmail.com>",
+  "homepage": "https://github.com/moshemalawach/nulsworldmobile#readme",
+  "repository": "git+https://github.com/moshemalawach/nulsworldmobile.git",
+  "license": "MIT",
   "nativescript": {
-    "id": "org.nativescript.nulsworldmobile",
-    "tns-android": {
+    "id": "world.nuls.mobile",
+    "tns-ios": {
       "version": "4.2.0"
     },
-    "tns-ios": {
+    "tns-android": {
       "version": "4.2.0"
     }
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/moshemalawach/nulsworldmobile.git"
-  },
-  "keywords": [
-    "nuls",
-    "blockchain"
-  ],
-  "author": "Moshe Malawach",
-  "license": "MIT",
-  "homepage": "https://github.com/moshemalawach/nulsworldmobile#readme",
   "dependencies": {
-    "nativescript-theme-core": "~1.0.4",
-    "tns-core-modules": "~4.2.0"
+    "vuex": "^3.0.1",
+    "@vue/devtools": "5.0.0-beta.3",
+    "nativescript-socket.io": "^0.9.0",
+    "nativescript-vue-devtools": "^1.0.0",
+    "nativescript-toast": "^1.4.6",
+    "nativescript-theme-core": "^1.0.4",
+    "nativescript-vue": "^2.0.0",
+    "tns-core-modules": "^4.2.0"
   },
   "devDependencies": {
-    "nativescript-dev-webpack": "~0.16.0"
-  },
-  "readme": "NativeScript Application"
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-transform-async-to-generator": "^7.1.0",
+    "@babel/preset-env": "^7.0.0",
+    "babel-loader": "^8.0.2",
+    "babel-traverse": "6.26.0",
+    "babel-types": "6.26.0",
+    "babylon": "6.18.0",
+    "clean-webpack-plugin": "^0.1.19",
+    "copy-webpack-plugin": "^4.5.2",
+    "css-loader": "^1.0.0",
+    "lazy": "1.0.11",
+    "nativescript-dev-webpack": "next",
+    "nativescript-vue-template-compiler": "^2.0.0",
+    "nativescript-worker-loader": "~0.9.0",
+    "node-sass": "^4.9.2",
+    "sass-loader": "^7.1.0",
+    "terser-webpack-plugin": "^1.1.0",
+    "vue-loader": "^15.2.6",
+    "webpack": "^4.16.4",
+    "webpack-bundle-analyzer": "~2.13.1",
+    "webpack-cli": "^3.1.0"
+  }
 }

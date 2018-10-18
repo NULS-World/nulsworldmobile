@@ -21,9 +21,10 @@ export default new Vuex.Store({
     last_broadcast: null
   },
   mutations: {
-    add_account(state, account) {
+    async add_account(state, account) {
+      console.log(account)
       state.accounts.push(account)
-      SecureStorage.set('accounts', JSON.stringify(state.accounts))
+      await SecureStorage.set('accounts', JSON.stringify(state.accounts))
     },
     update_accounts(state, accounts) {
       state.accounts = accounts

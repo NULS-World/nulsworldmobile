@@ -14,6 +14,7 @@ Vue.config.silent = (TNS_ENV === 'production')
 Vue.registerElement('Carousel', () => require('nativescript-carousel').Carousel)
 Vue.registerElement('CarouselItem', () => require('nativescript-carousel').CarouselItem)
 Vue.registerElement('CardView', () => require('nativescript-cardview').CardView)
+Vue.registerElement('PullToRefresh', () => require("nativescript-pulltorefresh").PullToRefresh)
 
 
 

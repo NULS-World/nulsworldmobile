@@ -13,39 +13,35 @@
                  androidSelectedTabHighlightColor="rgba(18,38,63,.9)">
             <TabViewItem title="Portfolio">
                 <AbsoluteLayout ref="portfolioLayout">
-                  <StackLayout orientation="vertical" left="0" top="0" height="100%" width="100%" marginBottom="48">
-                      <GridLayout col="0" row="0" height="100" columns="*,*,*" rows="*" class="nuls-blue">
-                        <StackLayout orientation="vertical" col="0" row="0">
-                          <Label class="header-pretitle text-secondary" text="Staked" />
-                          <Label class="text-white">
-                            {{(total_consensus_locked || 0)/100000000}}
-                          </Label>
-                        </StackLayout>
+                  <PullToRefresh @refresh="refreshList" left="0" top="0" height="100%" width="100%" marginBottom="48">
+                    <DockLayout stretchLastChild="true">
+                        <GridLayout dock="top" height="100" columns="*,*,*" rows="*" class="nuls-blue">
+                          <StackLayout orientation="vertical" col="0" row="0">
+                            <Label class="header-pretitle text-secondary" text="Staked" />
+                            <Label class="text-white" width="100%">{{((total_consensus_locked || 0)/100000000).toFixed(3)}}</Label>
+                          </StackLayout>
 
-                        <StackLayout orientation="vertical" col="1" row="0">
-                          <Label class="header-pretitle text-secondary" text="Time Locked" />
-                          <Label class="text-white">
-                            {{(total_time_locked || 0)/100000000}}
-                          </Label>
-                        </StackLayout>
+                          <StackLayout orientation="vertical" col="1" row="0">
+                            <Label class="header-pretitle text-secondary" text="Time Locked" />
+                            <Label class="text-white">{{((total_time_locked || 0)/100000000).toFixed(3)}}</Label>
+                          </StackLayout>
 
-                        <StackLayout orientation="vertical" col="2" row="0">
-                          <Label class="header-pretitle text-secondary" text="Available" />
-                          <Label class="text-white">
-                            {{(total_available || 0)/100000000}}
-                          </Label>
-                        </StackLayout>
-                      </GridLayout>
-                      <ScrollView>
-                  			<ListView for="account in accounts" class="list-group" @itemTap="onItemTap">
-                  				<v-template>
-                  					<GridLayout class="list-group-item" rows="*,*" columns="3*,*">
-                  						<Label row="0" col="0" :text="account.address" class="address" />
-                  					</GridLayout>
-                  				</v-template>
-                  			</ListView>
-                  		</ScrollView>
-                  </StackLayout>
+                          <StackLayout orientation="vertical" col="2" row="0">
+                            <Label class="header-pretitle text-secondary" text="Available" />
+                            <Label class="text-white">{{((total_available || 0)/100000000).toFixed(3)}}</Label>
+                          </StackLayout>
+                        </GridLayout>
+                        <ScrollView dock="bottom">
+                    			<ListView for="account in accounts" class="list-group" @itemTap="onItemTap">
+                    				<v-template>
+                    					<GridLayout class="list-group-item" rows="*,*" columns="3*,*">
+                    						<Label row="0" col="0" :text="account.address" class="address" />
+                    					</GridLayout>
+                    				</v-template>
+                    			</ListView>
+                    		</ScrollView>
+                    </DockLayout>
+                  </PullToRefresh>
 			            <StackLayout left="0" top="0" height="100%" width="100%" class="backdrop" />
 
             			<AbsoluteLayout ref="fabItemPosition" marginTop="83%" marginLeft="75%">
@@ -163,10 +159,17 @@
         console.log(result.data)
         this.unspent_info = result.data.unspent_info
         this.last_height = result.data.last_block_height
-        this.total_unspent = Object.values(this.unspent_info).map((u) => u.unspent_value).reduce((e, i) => e + i)
-        this.total_available = Object.values(this.unspent_info).map((u) => u.available_value).reduce((e, i) => e + i)
-        this.total_consensus_locked = Object.values(this.unspent_info).map((u) => u.consensus_locked_value).reduce((e, i) => e + i)
-        this.total_time_locked = Object.values(this.unspent_info).map((u) => u.time_locked_value).reduce((e, i) => e + i)
+        if (Object.keys(this.unspent_info).length) {
+          this.total_unspent = Object.values(this.unspent_info).map((u) => u.unspent_value).reduce((e, i) => e + i)
+          this.total_available = Object.values(this.unspent_info).map((u) => u.available_value).reduce((e, i) => e + i)
+          this.total_consensus_locked = Object.values(this.unspent_info).map((u) => u.consensus_locked_value).reduce((e, i) => e + i)
+          this.total_time_locked = Object.values(this.unspent_info).map((u) => u.time_locked_value).reduce((e, i) => e + i)
+        }
+      },
+      async refreshList(args) {
+        let pullRefresh = args.object
+        await this.updateStats()
+        pullRefresh.refreshing = false
       }
     },
     async created() {
